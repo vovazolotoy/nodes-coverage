@@ -12,9 +12,15 @@ function fizz_buzz(numbers) {
             result.push(number)
         }
     }
+
     if (false) {
         console.log('surprize')
     }
+
+    if (number < 10) {
+        console.log('number is less then 10')
+    }
+
     return result.join(', ')
 }
 
