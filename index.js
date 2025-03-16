@@ -12,7 +12,9 @@ function fizz_buzz(numbers) {
             result.push(number)
         }
     }
-    
+    if (false) {
+        console.log('surprize')
+    }
     return result.join(', ')
 }
 
