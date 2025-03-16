@@ -1,6 +1,24 @@
+name: Upload Coverage
+# This workflow represents a set of basic End-to-End tests
+on:
+  push:
+    branches:
+      - 'main'
+  pull_request:
+  workflow_dispatch:
+
 jobs:
-  my_first_job:
-   name: Upload coverage reports to Codecov
-    uses: codecov/codecov-action@v5
-    with:
-      token: ${{ secrets.CODECOV_TOKEN }}
+  basic:
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-22.04, ubuntu-24.04, windows-2022, macos-14]
+    runs-on: ${{ matrix.os }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Upload coverage reports to Codecov
+        uses: codecov/codecov-action@v
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }}
