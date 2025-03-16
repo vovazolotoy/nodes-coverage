@@ -1,24 +1,28 @@
-name: Upload Coverage
-# This workflow represents a set of basic End-to-End tests
-on:
-  push:
-    branches:
-      - 'main'
-  pull_request:
-  workflow_dispatch:
+name: Run tests and upload coverage
+
+on: 
+  push
 
 jobs:
-  basic:
-    strategy:
-      fail-fast: false
-      matrix:
-        os: [ubuntu-22.04, ubuntu-24.04, windows-2022, macos-14]
-    runs-on: ${{ matrix.os }}
+  test:
+    name: Run tests and collect coverage
+    runs-on: ubuntu-latest
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
 
-      - name: Upload coverage reports to Codecov
+      - name: Set up Node
+        uses: actions/setup-node@v4
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Run tests
+        run: npx jest --coverage
+
+      - name: Upload results to Codecov
         uses: codecov/codecov-action@v5
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
