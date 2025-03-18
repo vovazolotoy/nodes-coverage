@@ -18,7 +18,15 @@ function fizz_buzz(numbers) {
     }
 
     if (number < 10) {
-        console.log('number is less then 10')
+        console.log('the number is less then 10')
+    }
+
+    if (number < 0) {
+        console.log('the number is negative')
+    }
+
+    if (number < -10) {
+        console.log('the number is less then -10')
     }
 
     return result.join(', ')
